@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="account_account_list_view_inherit" model="ir.ui.view">
+        <field name="name">account.account.tree.view</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list"/>
+        <field name="arch" type="xml">
+             <xpath expr=".//field[@name='name']" position="after">
+                <field name="arabic_name" string="Arabic Name" />
+            </xpath>
+        </field>
+    </record>
+    <record id="account_account_form_view_inherit" model="ir.ui.view">
+            <field name="name">account.account.form.view</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//div[@class='oe_title']" position="after">
+                        <group>
+                            <group>
+                                <field name="arabic_name" />
+                            </group>
+                        </group>
+                    </xpath>
+            </field>
+        </record>
+</odoo>

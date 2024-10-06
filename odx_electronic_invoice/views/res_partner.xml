@@ -1,0 +1,50 @@
+<odoo>
+    <record id="res_partner_arabic" model="ir.ui.view">
+        <field name="name">res.partner.arabic.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <label for="arabic_name" class="oe_edit_only"/>
+                <h1>
+                    <field name="arabic_name"/>
+                </h1>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+
+                <label for="street" string="Company Address Arabic"/>
+                <div class="o_address_format">
+                    <field name="street_1_arabic" placeholder="Street..." class="o_address_street"/>
+                    <field name="street_2_arabic" placeholder="Street 2..." class="o_address_street"/>
+                    <div class="o_row">
+                        <field name="city_arabic" placeholder="City" class="o_address_city"/>
+                        <field name="state_arabic" class="o_address_state" placeholder="State"
+                               options='{"no_open": True}'/>
+                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                    </div>
+                    <field name="country_arabic" placeholder="Country" class="o_address_country"
+                           options='{"no_open": True}'/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="replace">
+                <label for="phone" string="Phone"/>
+                <div class="o_row">
+                    <field name="phone"/>
+                    <field name="phone_arabic" placeholder="Phone Arabic" no_label="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="code" string="Code"/>
+                <field name="cr_num" string="CR No./IEC No."/>
+                <field name="cr_num_arabic" string="CR No./IEC no. Arabic"/>
+<!--                <field name="ref_arabic" string="Reference Arabic"/>-->
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="ref_arabic" string="Reference Arabic"/>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="vat_arabic"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <div class="header" style="font-family:Almarai;">
+                <div class="row">
+                    <table width="100%">
+                        <tr>
+                            <td width="35%" style="text-align:left">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"
+                                     style="max-height: 200px;max-width: 40%; margin-left:16px;"/>
+                            </td>
+                            <td width="20%" style="text-align:center;">
+                                <span><u><b>TAX INVOICE</b></u></span>
+                                <br/>
+                                <span><u><b>فاتورة ضريبية</b></u></span>
+                            </td>
+                            <td width="35%"  style="text-align:right">
+                                <img src="/odx_electronic_invoice/static/src/img/design.jpeg" style="max-height: 140px;max-width: 800px; margin-right:15px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="border:1px solid black;padding:0px;margin-top:1px;margin-bottom:3px;"/>
+                <table width="100%" style="font-size:15px;">
+                    <tr>
+                        <td>
+                            <span><b>Tax Invoice No. - </b></span>
+                            <span t-esc="o.name"/>
+                            <br/>
+                            <span>فاتورة ضريبية</span>
+                        </td>
+                        <td></td>
+                        <td style="text-align:right;">
+                            <span>Date: </span>
+                            <span t-if="o.invoice_date" t-esc="o.invoice_date.strftime('%B %d,%Y')"/>
+                            <span> :التاريخ </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="article">
+                <t t-raw="0"/>
+            </div>
+
+
+            <div class="footer" style="font-size:12px;">
+
+                <table width="100%" style="font-size:10px;">
+                    <tr >
+                        <td>
+                            <span><strong>Bank Details of FGOC:</strong></span>
+                        </td>
+                    </tr>
+                    <br/>
+                    <tr>
+                        <td width="15%">
+                            <span>Beneficiary Name:</span>
+                        </td>
+                        <td width="62%">
+                            <b><span t-esc="company.name"/></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>IBAN:</span>
+                        </td>
+                        <td>
+                            <span t-esc="company.iban_no"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Bank name:</span>
+                        </td>
+                        <td>
+                            <b><span  t-if="company.bank_id" t-esc="company.bank_id.name"/></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Swift code:</span>
+                        </td>
+                        <td>
+                            <span t-esc="company.swift_code"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Account number:</span>
+                        </td>
+                        <td>
+                            <span t-esc="company.acc_num"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Address:</span>
+                        </td>
+                        <td>
+                            <span>Head office,Al-Nahda Building P.O Box 6277 Jeddah 21442, Kingdom of Saudi Arabia</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Tel:</span>
+                        </td>
+                        <td>
+                            <span>00966126098888</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Fax:</span>
+                        </td>
+                        <td>
+                            <span>00966122346996</span>
+                        </td>
+                        <td width="4%" style="color:#B2BEB5;">
+                            <span>REF #:</span>
+                        </td>
+                        <td style="color:#B2BEB5;">
+                            <span>FGOC/SLS/FTM/007</span>
+                        </td>
+                    </tr>
+                </table>
+                <div style="border:1px solid black;padding:0px;margin-top:3px;margin-bottom:3px;"/>
+                <table width="100%">
+                    <tr>
+                       <td>
+                           <img src="/odx_electronic_invoice/static/src/img/report_footer.jpeg" width="102%"/>
+                       </td>
+                    </tr>
+                </table>
+            </div>
+
+        </template>
+    </data>
+</odoo>

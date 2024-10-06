@@ -1,0 +1,26 @@
+<odoo>
+    <record id="res_bank_inherit" model="ir.ui.view">
+        <field name="name">res.bank.form.inherit</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="before">
+                <field name="iban_no" string="Iban No"/>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="arabic_name" string="Arabic Name"/>
+                <label for="street" string="Address Arabic"/>
+                <div class="o_address_format">
+                    <field name="street_1_arabic" placeholder="Street..." class="o_address_street"/>
+                    <field name="street_2_arabic" placeholder="Street 2..." class="o_address_street"/>
+                    <div class="o_row">
+                        <field name="city_arabic" placeholder="City" class="o_address_city"/>
+                        <field name="state_arabic" class="o_address_state" placeholder="State"
+                               options='{"no_open": True}'/>
+                    </div>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

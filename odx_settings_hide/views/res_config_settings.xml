@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="general_settings_hide" model="ir.ui.view">
+        <field name="name">general.settings.inherited</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]//div[hasclass('app_settings_block')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="General Settings" string="General Settings" data-key="general_settings">
+
+                    <div id="invite_users">
+                        <h2>Users</h2>
+                        <div class="row mt16 o_settings_container" name="users_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="active_user_setting">
+                                <div class="o_setting_right_pane">
+                                    <span class="fa fa-lg fa-users" aria-label="Number of active users"/>
+                                    <field name='active_user_count' class="w-auto pl-3 font-weight-bold"/>
+                                    <span class='o_form_label' attrs="{'invisible':[('active_user_count', '&gt;', '1')]}">
+                                        Active User
+                                    </span>
+                                    <span class='o_form_label' attrs="{'invisible':[('active_user_count', '&lt;=', '1')]}">
+                                        Active Users
+                                    </span>
+                                    <a href="https://www.odoo.com/documentation/14.0/applications/general/odoo_basics/users.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                                    <br/>
+                                    <button name="%(base.action_res_users)d" icon="fa-arrow-right" type="action" string="Manage Users" class="btn-link o_web_settings_access_rights"/>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="invite_users_setting">
+                                <div class="o_setting_right_pane">
+                                    <widget name='res_config_invite_users'/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="companies">
+                        <h2>Companies</h2>
+                        <div class="row mt16 o_settings_container" name="companies_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="company_details_settings">
+                                <div class="o_setting_right_pane">
+                                    <field name="company_name" class="font-weight-bold"/>
+                                    <br/>
+                                    <field name="company_informations" class="text-muted" style="width: 90%;"/>
+                                    <br/>
+                                    <button name="open_company" icon="fa-arrow-right" type="object" string="Update Info" class="btn-link"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="companies_setting">
+                                <div class="o_setting_right_pane">
+                                    <field name='company_count' class="w-auto pl-1 font-weight-bold"/>
+                                    <span class='o_form_label' attrs="{'invisible':[('company_count', '&gt;', '1')]}">
+                                        Company
+                                    </span>
+                                    <span class='o_form_label' attrs="{'invisible':[('company_count', '&lt;=', '1')]}">
+                                        Companies
+                                    </span>
+                                    <br/>
+                                    <div class="mt8">
+                                        <button name="%(base.action_res_company_form)d" icon="fa-arrow-right" type="action" string="Manage Companies" class="btn-link"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="languages">
+                        <h2>Languages</h2>
+                        <div class='row mt16 o_settings_container' name="languages_setting_container">
+                            <div class='col-xs-12 col-md-6 o_setting_box' id="languages_setting">
+                                <div class='o_setting_right_pane'>
+                                    <!-- TODO This is not an ideal solution but it looks ok on the interface -->
+                                    <div class="w-50">
+                                        <field name="language_count" class="w-auto pl-1 font-weight-bold"/>
+                                        <span class='o_form_label' attrs="{'invisible':[('language_count', '&gt;', '1')]}">
+                                            Language
+                                        </span>
+                                        <span class='o_form_label' attrs="{'invisible':[('language_count', '&lt;=', '1')]}">
+                                            Languages
+                                        </span>
+                                    </div>
+                                    <div class="mt8">
+                                        <button name="%(base.action_view_base_language_install)d" icon="fa-arrow-right" type="action" string="Add Language" class="btn-link"/>
+                                    </div>
+                                    <div class="mt8" groups="base.group_no_one">
+                                        <button name="%(base.res_lang_act_window)d" icon="fa-arrow-right" type="action" string="Manage Languages" class="btn-link"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="business_documents">
+                        <h2>Business Documents</h2>
+                        <div class="row mt16 o_settings_container" name="business_documents_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="paper_format_setting">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Format</span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                    <div class="text-muted">
+                                        Set the paper format of printed documents
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16 row">
+                                            <label for="paperformat_id" string="Format" class="col-3 col-lg-3 o_light_label"/>
+                                            <field name="paperformat_id" class="oe_inline" required="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="document_layout_setting">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Document Layout</span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                    <div class="text-muted">
+                                        Choose the layout of your documents
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16" groups="base.group_no_one">
+                                            <label for="external_report_layout_id" string="Layout" class="col-3 col-lg-3 o_light_label"/>
+                                            <field name="external_report_layout_id" domain="[('type','=', 'qweb')]" class="oe_inline"/>
+                                        </div>
+                                        <div class="mt8">
+                                            <button name="%(web.action_base_document_layout_configurator)d" string="Configure Document Layout" type="action" class="oe_link" icon="fa-arrow-right"/>
+                                            <button name="edit_external_header" string="Edit Layout" type="object" class="oe_link" groups="base.group_no_one"/>
+                                            <button name="%(web.action_report_externalpreview)d" string="Preview Document" type="action" class="oe_link" groups="base.group_no_one"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="contacts_settings">
+                        <h2>Contacts</h2>
+                        <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box" id="sms">
+                                    <div class="o_setting_right_pane" id="sms_settings">
+                                        <div class="o_form_label">
+                                        Send SMS
+                                        <a href="https://www.odoo.com/documentation/14.0/applications/marketing/sms_marketing/pricing/pricing_and_faq.html" title="Documentation" class="ml-1 o_doc_link" target="_blank"></a>
+                                        </div>
+                                        <div class="text-muted">
+                                            Send texts to your contacts
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 o_setting_box" title="When populating your address book, Odoo provides a list of matching companies. When selecting one item, the company data and logo are auto-filled." id="partner_autocomplete">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_partner_autocomplete"/>
+                                </div>
+                                <div class="o_setting_right_pane" id="partner_autocomplete_settings">
+                                    <label for="module_partner_autocomplete"/>
+                                    <div class="text-muted">
+                                        Automatically enrich your contact base with company data
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <h2 groups="odx_einvoice_technical.group_accounting_access_only">Discuss</h2>
+                <div class="row mt16 o_settings_container" id="emails" groups="odx_einvoice_technical.group_accounting_access_only">
+                    <div class="col-12 col-lg-6 o_setting_box" id="activities_setting">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Activities</span>
+                            <div class="text-muted">
+                                Configure your activity types
+                            </div>
+                            <div class="content-group">
+                                <div class="mt8">
+                                    <button name="%(mail.mail_activity_type_action)d" string="Activity Types" type="action" class="oe_link" icon="fa-arrow-right"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box"
+                        id="email_servers_setting"
+                        title="Using your own email server is required to send/receive emails in Community and Enterprise versions. Online users already benefit from a ready-to-use email server (@mycompany.odoo.com).">
+                        <div class="o_setting_left_pane">
+                            <field name="external_email_server_default"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="external_email_server_default"/>
+                            <a href="https://www.odoo.com/documentation/14.0/applications/productivity/discuss/advanced/email_servers.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                            <div class="text-muted" id="external_email_server_default">
+                                Configure your own email servers
+                            </div>
+                            <div class="content-group"  attrs="{'invisible': [('external_email_server_default', '=', False)]}">
+                                <div class="row mt16" id="mail_alias_domain">
+                                    <label for="alias_domain" class="col-lg-3 o_light_label"/>
+                                    <field name="alias_domain" placeholder="mycompany.odoo.com"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2>Permissions</h2>
+                <div class="row mt16 o_settings_container" id="user_default_rights">
+                    <div class="col-12 col-lg-6 o_setting_box"  title="By default, new users get highest access rights for all installed apps." id="access_rights">
+                        <div class="o_setting_left_pane">
+                            <field name="user_default_rights"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label string="Default Access Rights" for="user_default_rights"/>
+                            <div class="text-muted">
+                                Set custom access rights for new users
+                            </div>
+                            <div class="content-group" attrs="{'invisible': [('user_default_rights','=',False)]}">
+                                <div class="mt8">
+                                    <button type="object" name="open_default_user" string="Default Access Rights" icon="fa-arrow-right" class="btn-link"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box"
+                        id="login_documents"
+                        title=" To send invitations in B2B mode, open a contact or select several ones in list view and click on 'Portal Access Management' option in the dropdown menu *Action*.">
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="auth_signup_uninvited"/>
+                            <div class="text-muted">
+                                Let your customers log in to see their documents
+                            </div>
+                            <div class="mt8">
+                                <field name="auth_signup_uninvited" class="o_light_label" widget="radio" required="True"/>
+                            </div>
+                            <div class="content-group" attrs="{'invisible': [('auth_signup_uninvited','=','b2b')]}">
+                                <div class="mt8">
+                                    <button type="object" name="open_template_user" string="Default Access Rights" icon="fa-arrow-right" class="btn-link"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" id="enable_password_reset">
+                        <div class="o_setting_left_pane">
+                            <field name="auth_signup_reset_password"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label string="Password Reset" for="auth_signup_reset_password"/>
+                            <div class="text-muted">
+                                Enable password reset from Login page
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box"
+                         groups="base.group_system">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <button type="action" name="%(base.action_apikeys_admin)d" string="Manage API Keys" icon="fa-arrow-right" class="btn-link"/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" groups="base.group_no_one" id="allow_import">
+                        <div class="o_setting_left_pane">
+                            <field name="module_base_import" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label string="Import &amp; Export" for="module_base_import"/>
+                            <a href="https://www.odoo.com/documentation/14.0/applications/general/base_import/import_faq.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                            <div class="text-muted">
+                                Allow users to import data from CSV/XLS/XLSX/ODS files
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" id="feedback_motivate_setting" groups="base.group_no_one">
+                        <div class="o_setting_left_pane">
+                            <field name="show_effect"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="show_effect"/>
+                            <div class="text-muted">
+                                Add fun feedback and motivate your employees
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="iap_portal" groups="odx_einvoice_technical.group_accounting_access_only">
+                        <h2>In-App Purchases</h2>
+                        <div class='row mt16 o_settings_container iap_portal' name="iap_purchases_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="iap_credits_setting">
+                                <div class='o_setting_right_pane'>
+                                    <div class="o_form_label">
+                                    Odoo IAP
+                                    <a href="https://www.odoo.com/documentation/14.0/applications/general/in_app_purchase/in_app_purchase.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                                    <a href="https://www.odoo.com/documentation/14.0/developer/webservices/iap.html" title="Documentation" class="ml-1 o_doc_link" target="_blank"></a>
+                                    </div>
+                                    <div class="text-muted">
+                                        View your IAP Services and recharge your credits
+                                    </div>
+                                    <div class='mt8'>
+                                        <button name="%(iap.open_iap_account)d" icon="fa-arrow-right" type="action" string="View My Services" class="btn-link"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Units of Measure</h2>
+                    <div class="row mt16 o_settings_container" id="product_general_settings">
+                        <div class="col-12 col-lg-6 o_setting_box" id="weight_uom_setting">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="product_weight_in_lbs" string="Weight UoM"/>
+                                <div class="text-muted">
+                                    Define your weight unit of measure
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="product_weight_in_lbs" class="o_light_label" widget="radio"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="manage_volume_uom_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="product_volume_volume_in_cubic_feet" string="Volume UoM "/>
+                                <div class="text-muted">
+                                    Define your volume unit of measure
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="product_volume_volume_in_cubic_feet" class="o_light_label" widget="radio"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="multi_company" groups="odx_einvoice_technical.group_accounting_access_only">
+                        <field name="company_id" invisible="1"/>
+                        <h2>Multi-Company</h2>
+                        <div class="row mt16 o_settings_container" name="multicompany_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" title="Configure company rules to automatically create SO/PO when one of your company sells/buys to another of your company." id="inter_company">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_account_inter_company_rules" widget="upgrade_boolean"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string="Inter-Company Transactions" for="module_account_inter_company_rules"/>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                    <div class="text-muted">
+                                        Automatically generate counterpart documents for orders/invoices between companies
+                                    </div>
+                                    <div class="content-group" attrs="{'invisible': [('module_account_inter_company_rules','=',False)]}" id="inter_companies_rules">
+                                        <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 groups="odx_einvoice_technical.group_accounting_access_only">Integrations</h2>
+                    <div class="row mt16 o_settings_container" name="integration" groups="odx_einvoice_technical.group_accounting_access_only">
+                        <div class="col-12 col-lg-6 o_setting_box" id="external_pads_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="module_pad"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_pad"/>
+                                <div class="text-muted">
+                                    Use external pads in Odoo Notes
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_pad','=',False)]}" id="msg_module_pad">
+                                    <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="sync_google_calendar_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="module_microsoft_calendar" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Outlook Calendar" for="module_microsoft_calendar"/>
+                                <div class="text-muted">
+                                    Synchronize your calendar with Outlook
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_microsoft_calendar', '=', False)]}" id="msg_module_microsoft_calendar">
+                                    <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="sync_google_calendar_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="module_google_calendar" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Google Calendar" for="module_google_calendar"/>
+                                <a href="https://www.odoo.com/documentation/14.0/applications/general/calendars/google/google_calendar_credentials.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                                <div class="text-muted">
+                                    Synchronize your calendar with Google Calendar
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_google_calendar','=',False)]}" id="msg_module_google_calendar">
+                                    <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="google_drive_documents_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="module_google_drive" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Google Drive" for="module_google_drive"/>
+                                <div class="text-muted">
+                                    Create and attach Google Drive documents to any record
+                                </div>
+                                <div class="content-group mt16" attrs="{'invisible': [('module_google_drive','=',False)]}" id="msg_module_google_drive">
+                                    <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="google_spreadsheet_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="module_google_spreadsheet" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_google_spreadsheet"/>
+                                <div class="text-muted">
+                                    Extract and analyze Odoo data from Google Spreadsheet
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_google_spreadsheet','=',False)]}" id="msg_module_google_spreadsheet">
+                                    <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="module_auth_oauth">
+                            <div class="o_setting_left_pane">
+                                <field name="module_auth_oauth" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="OAuth Authentication" for="module_auth_oauth"/>
+                                <div class="text-muted">
+                                   Use external accounts to log in (Google, Facebook, etc.)
+                                </div>
+                                <div class="content-group mt16" attrs="{'invisible': [('module_auth_oauth','=',False)]}" id="msg_module_auth_oauth">
+                                    <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="oauth">
+                            <div class="o_setting_left_pane">
+                                <field name="module_auth_ldap"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="auth_ldap_right_pane">
+                                <label string="LDAP Authentication" for="module_auth_ldap"/>
+                                <a href="https://www.odoo.com/documentation/14.0/applications/general/auth/ldap.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                                <div class="text-muted">
+                                   Use LDAP credentials to log in
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_auth_ldap','=',False)]}" id="auth_ldap_warning">
+                                    <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="unsplash">
+                            <div class="o_setting_left_pane">
+                                <field name="module_web_unsplash"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="web_unsplash_settings">
+                                <label for="module_web_unsplash"/>
+                                <a href="https://www.odoo.com/documentation/14.0/applications/general/unsplash/unsplash_access_key.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                                <div class="text-muted">
+                                    Find free high-resolution images from Unsplash
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_web_unsplash', '=', False)]}" id="web_unsplash_warning">
+                                    <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to set up the feature.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="base_geolocalize">
+                            <div class="o_setting_left_pane">
+                                <field name="module_base_geolocalize"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="web_geolocalize_settings">
+                                <label string="Geo Localization" for="module_base_geolocalize"/>
+                                <div class="text-muted">
+                                   GeoLocalize your partners
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_base_geolocalize','=', False)]}" name="base_geolocalize_warning">
+                                    <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to choose your Geo Provider.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="recaptcha">
+                            <div class="o_setting_left_pane">
+                                <field name="module_google_recaptcha"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="website_recaptcha_settings">
+                                <label for="module_google_recaptcha"/>
+                                <div class="text-muted">
+                                    Protect your forms from spam and abuse.
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_google_recaptcha', '=', False)]}" id="recaptcha_warning">
+                                    <div class="mt16 text-warning"><strong>Save</strong> this page and come back here to set up reCaptcha.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <widget name='res_config_dev_tool' groups="odx_einvoice_technical.group_accounting_access_only"/>
+                    <div id='about'>
+                        <h2>About</h2>
+                        <div class="row mt16 o_settings_container" name="about_setting_container">
+                            <div class='col-12 col-lg-6 o_setting_box' id='appstore' groups="odx_einvoice_technical.group_accounting_access_only">
+                                <div class="d-flex">
+                                    <div class="o_setting_right_pane">
+                                        <!-- FIXME Those links are defined directly in the template which means that we will have to
+                                        update the template code is the link ever changes -->
+                                        <a class="d-block mx-auto" href="https://play.google.com/store/apps/details?id=com.odoo.mobile" target="blank">
+                                            <img alt="On Google Play" class="d-block mx-auto img img-fluid" src="/base_setup/static/src/img/google_play.png"/>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class='d-block mx-auto' href="https://itunes.apple.com/us/app/odoo/id1272543640" target="blank">
+                                            <img alt="On Apple Store" class="d-block mx-auto img img-fluid" src="/base_setup/static/src/img/app_store.png"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <widget name='res_config_edition'/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="invoice_account_settings_hide" model="ir.ui.view">
+        <field name="name">invoice.account.settings.inherited</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]//div[hasclass('app_settings_block')][@data-key='account']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <field name="country_code" invisible="1"/>
+                <div class="app_settings_block" data-string="Accounting" string="Accounting" data-key="account" groups="account.group_account_manager">
+                    <field name="has_chart_of_accounts" invisible="1"/>
+                    <field name="has_accounting_entries" invisible="1"/>
+                    <h2 attrs="{'invisible': [('has_accounting_entries','!=',False)]}">Fiscal Localization</h2>
+                    <div class="row mt16 o_settings_container" name="fiscal_localization_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('has_accounting_entries','!=',False)]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Fiscal Localization</span>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Taxes, fiscal positions, chart of accounts &amp; legal statements for your country
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="chart_template_id" string="Package" class="col-lg-3 o_light_label"/>
+                                        <field name="chart_template_id" widget="selection"/>
+                                    </div>
+                                    <div class="mt8">
+                                        <button name="%(account.open_account_charts_modules)d" icon="fa-arrow-right" type="action" string="Install More Packages" discard="0" class="btn-link"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Taxes</h2>
+                    <div class="row mt16 o_settings_container" name="default_taxes_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="default_taxes"
+                            title="These taxes are set in any new product created.">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Default Taxes</span>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Default taxes applied to local transactions
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Sales Tax" for="sale_tax_id" class="col-lg-3 o_light_label"/>
+                                        <field name="sale_tax_id" domain="[('type_tax_use', 'in', ('sale', 'all')), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Purchase Tax" for="purchase_tax_id" class="col-lg-3 o_light_label"/>
+                                        <field name="purchase_tax_id" domain="[('type_tax_use', 'in', ('purchase', 'all')), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="rounding_method" title="A rounding per line is advised if your prices are tax-included. That way, the sum of line subtotals equals the total with taxes.">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Rounding Method</span>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    How total tax amount is computed in orders and invoices
+                                </div>
+                                 <div class="content-group">
+                                    <field name="tax_calculation_rounding_method" class="o_light_label mt16" widget="radio"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="taxcloud_settings" groups="odx_einvoice_technical.group_accounting_access_only">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_taxcloud" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="account_taxcloud_right_pane">
+                                <label for="module_account_taxcloud" string="TaxCloud"/>
+                                <div class="text-muted">
+                                    Compute tax rates based on U.S. ZIP codes
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="eu_service" title="If you sell goods and services to customers in a foreign EU country, you must charge VAT based on the delivery address. This rule applies regardless of where you are located.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_l10n_eu_service"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="l10n_eu_service_right_pane">
+                                <label for="module_l10n_eu_service"/>
+                                <a href="https://www.odoo.com/documentation/14.0/applications/finance/accounting/taxation/taxes/eu_distance_selling.html" title="Documentation" class="o_doc_link" target="_blank"></a>
+                                <div class="text-muted">
+                                    Apply VAT of the EU country to which goods and services are delivered.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="tax_exigibility"
+                            title="Select this if the taxes should use cash basis, which will create an entry for such taxes on a given account during reconciliation."
+                            groups="account.group_account_user">
+                            <div class="o_setting_left_pane">
+                                <field name="tax_exigibility"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="tax_exigibility"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Allow to configure taxes using cash basis
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('tax_exigibility', '=', False)]}">
+                                    <div class="row mt16">
+                                        <label for="tax_cash_basis_journal_id" class="col-lg-3 o_light_label"/>
+                                        <field name="tax_cash_basis_journal_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="account_cash_basis_base_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="account_cash_basis_base_account_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Currencies</h2>
+                    <div class="row mt16 o_settings_container" name="main_currency_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="main_currency">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Main Currency</span>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Main currency of your company
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="currency_id" class="col-lg-3 o_light_label"/>
+                                        <field name="currency_id" options="{'no_create_edit': True, 'no_open': True}" context="{'active_test': False}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="record_transactions">
+                            <div class="o_setting_left_pane">
+                                <field name="group_multi_currency"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Multi-Currencies" for="group_multi_currency"/>
+                                <div class="text-muted">
+                                    Record transactions in foreign currencies
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('group_multi_currency', '=', False)]}">
+                                    <div class="mt8">
+                                        <button name="%(base.action_currency_all_form)d" icon="fa-arrow-right" type="action" string="Activate Other Currencies" class="btn-link"/>
+                                    </div>
+                                    <div class="mt16">
+                                        <b>Post Exchange difference entries in:</b>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="currency_exchange_journal_id" class="col-lg-3 o_light_label" string="Journal" />
+                                        <field name="currency_exchange_journal_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="income_currency_exchange_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="income_currency_exchange_account_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="expense_currency_exchange_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="expense_currency_exchange_account_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="update_exchange_rates"
+                            attrs="{'invisible': [('group_multi_currency', '=', False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="module_currency_rate_live" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_currency_rate_live"/>
+                                <div class="text-muted" id="update_currency_live">
+                                    Update exchange rates automatically
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Customer Invoices</h2>
+                    <div class="row mt16 o_settings_container" id="invoicing_settings">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_setting_options">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Default Sending Options</span>
+                                <div class="text-muted">
+                                    Those options will be selected by default when clicking "Send &amp; Print" on invoices
+                                </div>
+                                <div class="mt16">
+                                    <div class="content-group" id="send_default">
+                                        <div class="row">
+                                            <field name="invoice_is_print" class="col-lg-1 ml16"/>
+                                            <label for="invoice_is_print"/>
+                                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."/>
+                                        </div>
+                                        <div class="row">
+                                            <field name="invoice_is_email" class="col-lg-1 ml16"/>
+                                            <label for="invoice_is_email"/>
+                                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."/>
+                                        </div>
+                                        <div class="row" attrs="{'invisible': [('module_snailmail_account', '=', False)]}">
+                                            <field name="invoice_is_snailmail" class="col-lg-1 ml16"/>
+                                            <label for="invoice_is_snailmail"/>
+                                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="send_invoices_followups" groups="odx_einvoice_technical.group_accounting_access_only">
+                            <div class="o_setting_left_pane">
+                                <field name="module_snailmail_account"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="snailmail_settings">
+                                <label for="module_snailmail_account"/>
+                                <div class="text-muted">
+                                    Send invoices and payment follow-ups by post
+                                </div>
+                                <div>
+                                    <div class="mt16" attrs="{'invisible': [('module_snailmail_account', '=', False)]}">
+                                        <div class="content-group">
+                                            <div class="row">
+                                                <field name="snailmail_color" class="col-lg-1 ml16"/>
+                                                <label for="snailmail_color"/>
+                                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."/>
+                                            </div>
+                                            <div class="row">
+                                                <field name="snailmail_duplex" class="col-lg-1 ml16"/>
+                                                <label for="snailmail_duplex"/>
+                                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."/>
+                                            </div>
+                                            <div class="row">
+                                                <field name="snailmail_cover" class="col-lg-1 ml16"/>
+                                                <label for="snailmail_cover"/>
+                                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <widget name="iap_buy_more_credits" service_name="snailmail"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="line_subtotals">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="show_line_subtotals_tax_selection"/>
+                                <div class="text-muted">
+                                    Line subtotals tax display
+                                </div>
+                                <div class="mt16">
+                                    <field name="show_line_subtotals_tax_selection" class="o_light_label" widget="radio"/>
+                                    <field name="group_show_line_subtotals_tax_excluded" invisible="1"/>
+                                    <field name="group_show_line_subtotals_tax_included" invisible="1"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="use_invoice_terms">
+                            <div class="o_setting_left_pane">
+                                <field name="use_invoice_terms"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="use_invoice_terms"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Show standard terms &amp; conditions on invoices/orders
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('use_invoice_terms','=',False)]}">
+                                    <div class="mt16">
+                                        <field name="invoice_terms" placeholder="Insert your terms &amp; conditions here..."/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="get_invoice_warnings">
+                            <div class="o_setting_left_pane">
+                                <field name="group_warning_account"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_warning_account" string="Warnings"/>
+                                <div class="text-muted">
+                                    Get warnings when invoicing specific customers
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="smallest_coinage_currency">
+                            <div class="o_setting_left_pane">
+                                <field name="group_cash_rounding"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_cash_rounding"/>
+                                <div class="text-muted">
+                                    Define the smallest coinage of the currency used to pay by cash
+                                </div>
+                                <div class="mt8">
+                                    <button name="%(account.rounding_list_action)d" icon="fa-arrow-right"
+                                            type="action" string="Cash Roundings" class="btn-link"
+                                            attrs="{'invisible': [('group_cash_rounding', '=', False)]}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="intrastat_statistics" groups="odx_einvoice_technical.group_accounting_access_only">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_intrastat" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="intrastat_right_pane">
+                                <label for="module_account_intrastat"/>
+                                <div class="text-muted">
+                                    Collect information and produce statistics on the trade in goods in Europe with intrastat
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_incoterm" groups="odx_einvoice_technical.group_accounting_access_only">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Default Incoterm</span>
+                                <div class="text-muted">
+                                    Default Incoterm of your company
+                                </div>
+                                <div class="text-muted">
+                                    <field name="incoterm_id"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="show_sale_receipts" groups="odx_einvoice_technical.group_accounting_access_only">
+                            <div class="o_setting_left_pane">
+                                <field name="group_show_sale_receipts" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="show_sale_receipts_right_pane">
+                                <label for="group_show_sale_receipts"/>
+                                <div class="text-muted">
+                                    Active to create sale receipt
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" groups="odx_einvoice_technical.group_accounting_access_only">
+                            <div class="o_setting_left_pane">
+                                <field name="customer_credit_limit" on_change="1"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="snailmail_settings">
+                                <label for="customer_credit_limit"/>
+                                <div class="text-muted">
+                                    Enable credit limit for customers
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 groups="odx_einvoice_technical.group_accounting_access_only">Customer Payments</h2>
+                    <div class="row mt16 o_settings_container" id="pay_invoice_online_setting_container" groups="odx_einvoice_technical.group_accounting_access_only">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_payment"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_account_payment"/>
+                                <div class="text-muted">
+                                    Let your customers pay their invoices online
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="account_batch_payment"
+                            groups="account.group_account_user">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_batch_payment" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_account_batch_payment" string="Batch Payments"/>
+                                <div class="text-muted">
+                                    Group payments into a single batch to ease the reconciliation process
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="collect_customer_payment"
+                            title="If you check this box, you will be able to collect payments using SEPA Direct Debit mandates.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_sepa_direct_debit" class="oe_inline" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="sepa_direct_debit_right_pane">
+                                <label string="SEPA Direct Debit (SDD)" for="module_account_sepa_direct_debit"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Collect customer payments in one-click using Euro SEPA Service
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('module_account_sepa_direct_debit', '=', False)]}">
+                                    <div class="text-warning mt16 mb4">
+                                        Save this page and come back here to set up the feature.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box"
+                            id="qr_code_invoices"
+                            title="Add a QR-code to your invoices so that your customers can pay instantly with their mobile banking application.">
+                            <div class="o_setting_left_pane">
+                                <field name="qr_code" class="oe_inline"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="qr_code_right_pane">
+                                <label string="QR Codes" for="qr_code"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Add a payment QR-code to your invoices
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 groups="odx_einvoice_technical.group_accounting_access_only">Vendor Bills</h2>
+                    <div class="row mt16 o_settings_container" id="account_vendor_bills" groups="odx_einvoice_technical.group_accounting_access_only">
+                        <div class="col-12 col-lg-6 o_setting_box" id="account_ocr_settings">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_invoice_extract" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="digitalizeocr">
+                                <label for="module_account_invoice_extract"/>
+                                <div class="text-muted">
+                                    Digitalize your scanned or PDF vendor bills with OCR and Artificial Intelligence
+                                </div>
+                                <div id="msg_invoice_extract" class="content-group" attrs="{'invisible': [('module_account_invoice_extract', '=', False)]}">
+                                    <div class="text-warning mt16 mb4">
+                                        Save this page and come back here to set up the feature.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="show_purchase_receipts">
+                            <div class="o_setting_left_pane">
+                                <field name="group_show_purchase_receipts" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="show_purchase_receipts_right_pane">
+                                <label for="group_show_purchase_receipts"/>
+                                <div class="text-muted">
+                                    Activate to create purchase receipt
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 groups="odx_einvoice_technical.group_accounting_access_only">Vendor Payments</h2>
+                    <div class="row mt16 o_settings_container" id="print_vendor_checks_setting_container" groups="odx_einvoice_technical.group_accounting_access_only">
+                        <div class="col-12 col-lg-6 o_setting_box" id="print_checks" groups="account.group_account_user">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_check_printing"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Checks" for="module_account_check_printing"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted" id="print_bills_payment">
+                                    Print checks to pay your vendors
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="account_check_printing_layout" class="col-lg-4 o_light_label"/>
+                                            <field name="account_check_printing_layout" required="True"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="account_check_printing_multi_stub" class="col-lg-4 o_light_label"/>
+                                            <field name="account_check_printing_multi_stub"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="account_check_printing_margin_top" class="col-lg-4 o_light_label"/>
+                                            <field name="account_check_printing_margin_top"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="account_check_printing_margin_left" class="col-lg-4 o_light_label"/>
+                                            <field name="account_check_printing_margin_left"/>
+                                        </div>
+                                        <div class="row" attrs="{'invisible': [('country_code', '!=', 'CA')]}">
+                                            <label for="account_check_printing_margin_right" class="col-lg-4 o_light_label"/>
+                                            <field name="account_check_printing_margin_right"/>
+                                        </div>
+                                        <div class="row" attrs="{'invisible': [('country_code', '!=', 'CA')]}">
+                                          <label for="account_check_printing_date_label" class="col-lg-4 o_light_label"/>
+                                          <field name="account_check_printing_date_label"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="sepa_payments"
+                            title="If you check this box, you will be able to register your payment using SEPA.">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_sepa" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" name="sepa_right_pane">
+                                <label for="module_account_sepa"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                <div class="text-muted">
+                                    Pay your bills in one-click using Euro SEPA Service
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <t groups="odx_einvoice_technical.group_accounting_access_only">
+                        <h2>Bank &amp; Cash</h2>
+                        <div class="row mt16 o_settings_container" id="bank_cash">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="account_yodlee"
+                                title="Get your bank statements automatically imported every 4 hours, or in one-click, using Yodlee and Plaid services. Once installed, set “Bank Feeds” to “Bank Synchronization” in bank account settings. Then, click “Configure” on the online account to enter your bank credentials.">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_account_yodlee" widget="upgrade_boolean"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_account_yodlee" string="Automatic Import"/>
+                                    <div class="text-muted">
+                                        Import your bank statements automatically
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="import_bank_statements_csv"
+                                title="Once installed, set 'Bank Feeds' to 'File Import' in bank account settings.This adds a button to import from the Accounting dashboard.">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_account_bank_statement_import_csv" widget="upgrade_boolean"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_account_bank_statement_import_csv" string="CSV Import"/>
+                                    <div class="text-muted">
+                                        Import your bank statements in CSV
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" title="Once installed, set 'Bank Feeds' to 'File Import' in bank account settings.This adds a button to import from the Accounting dashboard.">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_account_bank_statement_import_qif" widget="upgrade_boolean"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_account_bank_statement_import_qif" string="QIF Import"/>
+                                    <div class="text-muted">
+                                        Import your bank statements in QIF
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" title="Once installed, set 'Bank Feeds' to 'File Import' in bank account settings.This adds a button to import from the Accounting dashboard.">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_account_bank_statement_import_ofx" widget="upgrade_boolean"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_account_bank_statement_import_ofx" string="OFX Import"/>
+                                    <div class="text-muted">
+                                        Import your bank statements in OFX
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="import_bank_statement_camt"
+                                title="Once installed, set 'Bank Feeds' to 'File Import' in bank account settings.This adds a button to import from the Accounting dashboard.">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_account_bank_statement_import_camt" widget="upgrade_boolean"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_account_bank_statement_import_camt" string="CAMT Import"/>
+                                    <div class="text-muted">
+                                        Import your bank statements in CAMT.053
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t groups="odx_einvoice_technical.group_accounting_access_only">
+                        <h2>Fiscal Periods</h2>
+                        <div class="row mt16 o_settings_container" id="accounting_reports">
+                            <div class="col-12 col-lg-6 o_setting_box" id="fiscalyear" invisible="1" groups="account.group_account_user"/>
+                            <div class="col-12 col-lg-6 o_setting_box" id="dynamic_report" invisible="1" groups="account.group_account_user">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_account_reports" widget="upgrade_boolean"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_account_reports"/>
+                                    <div class="text-muted" id="account_reports">
+                                        Navigate easily through reports and see what is behind the numbers
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <h2 groups="odx_einvoice_technical.group_accounting_access_only">Analytics</h2>
+                    <div class="row mt16 o_settings_container" id="analytic" groups="odx_einvoice_technical.group_accounting_access_only">
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="track_costs_revenues"
+                            title="Allows you to use the analytic accounting."
+                            groups="account.group_account_user">
+                            <div class="o_setting_left_pane">
+                                <field name="group_analytic_accounting"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_analytic_accounting"/>
+                                <div class="text-muted">
+                                    Track costs &amp; revenues by project, department, etc
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                            id="tag_analytic_entries"
+                            groups="account.group_account_user">
+                            <div class="o_setting_left_pane">
+                                <field name="group_analytic_tags"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_analytic_tags"/>
+                                <div class="text-muted">
+                                    Allows to tag analytic entries and to manage analytic distributions
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="account_budget" title="This allows accountants to manage analytic and crossovered budgets. Once the master budgets and the budgets are defined, the project managers can set the planned amount on each analytic account." groups="account.group_account_user">
+                            <div class="o_setting_left_pane">
+                                <field name="module_account_budget" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="budget_management">
+                                <label for="module_account_budget"/>
+                                <div class="text-muted">
+                                    Use budgets to compare actual with expected revenues and costs
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="monitor_product_margins">
+                            <div class="o_setting_left_pane">
+                                <field name="module_product_margin"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_product_margin" string="Margin Analysis"/>
+                                <div class="text-muted">
+                                    Monitor your product margins from invoices
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

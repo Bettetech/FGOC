@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_electronic_invoice_custom_report" model="report.paperformat">
+        <field name="name">Electronic Invoice</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">44</field>
+        <field name="margin_bottom">62</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">44</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="account_electronic_invoices_arabic"
+            model="account.move"
+            string="Commercial Invoice"
+            report_type="qweb-pdf"
+            name="odx_electronic_invoice.report_local_invoice"
+            file="odx_electronic_invoice.report_local_invoice"
+            print_report_name="(object._get_report_base_filename())"
+            paperformat="paperformat_electronic_invoice_custom_report"
+    />
+
+    <record id="paperformat_electronic_invoice_report_fgoc" model="report.paperformat">
+        <field name="name">Electronic Invoice</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">50</field>
+        <field name="margin_bottom">62</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">50</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="account_electronic_invoices_fgoc"
+            model="account.move"
+            string="Tax Invoice"
+            report_type="qweb-pdf"
+            name="odx_electronic_invoice.report_electronic_invoice_fgoc"
+            file="odx_electronic_invoice.report_electronic_invoice_fgoc"
+            print_report_name="(object._get_report_base_filename())"
+            paperformat="paperformat_electronic_invoice_report_fgoc"/>
+
+
+
+</odoo>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="group_accounting_access_only" model="res.groups">
+        <field name="name">Account Technical</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record model='ir.ui.menu' id='base.menu_management'>
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id='utm.menu_link_tracker_root'>
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model='ir.ui.menu' id='mail.menu_root_discuss'>
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model='ir.ui.menu' id='account.menu_account_config'>
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id='account.menu_action_account_fiscal_position_form'>
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="account.root_payment_menu">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="account.menu_finance_entries_management">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="base.menu_action_res_groups">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="account.menu_action_incoterm_open">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="account.action_account_reconcile_model_menu">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="account.menu_action_account_journal_group_list">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="base_accounting_kit.menu_account_group">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="account.account_reports_management_menu">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="base_account_budget.menu_budget_post_form">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.ui.menu' id="base_accounting_kit.menu_action_account_asset_asset_list_normal_purchase">
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.actions.act_window' id='sms.res_partner_act_window_sms_composer_multi'>
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record model='ir.actions.act_window' id='sms.res_partner_act_window_sms_composer_single'>
+        <field name="groups_id" eval="[(6,0, [ref('odx_einvoice_technical.group_accounting_access_only')])]"/>
+    </record>
+
+    <record id="sales_team.group_sale_salesman" model="res.groups">
+        <field name="name">User: Own Documents Only (Sales)</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">the user will have access to his own data in the sales application.</field>
+    </record>
+
+    <record id="sales_team.group_sale_salesman_all_leads" model="res.groups">
+        <field name="name">User: All Documents (Sales)</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        <field name="comment">the user will have access to all records of everyone in the sales application.</field>
+    </record>
+
+    <record id="sales_team.group_sale_manager" model="res.groups">
+        <field name="name">Administrator (Sales)</field>
+        <field name="comment">the user will have an access to the sales configuration as well as statistic reports.</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+
+
+
+</odoo>
